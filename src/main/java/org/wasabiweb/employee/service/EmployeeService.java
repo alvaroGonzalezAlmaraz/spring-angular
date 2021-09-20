@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import org.wasabiweb.employee.exceptions.UserNotFoundException;
 import org.wasabiweb.employee.model.Employee;
 import org.wasabiweb.employee.repository.EmployeeRepository;
@@ -25,10 +26,10 @@ public class EmployeeService {
     }
 
     public List<Employee> findAllEmployees() {
-        return employeeRepository.findAll();
+        return (List<Employee>) employeeRepository.findAll();
     }
 
-    public Employee udateEmployee(Employee employee) {
+    public Employee updateEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
 
@@ -37,8 +38,7 @@ public class EmployeeService {
                 () -> new UserNotFoundException("El empleado con id nº: " + " no se encuentra en la base de datos"));
     }
 
-    public void deleteEmployee(Long id) {
-        employeeRepository.deleteEmployeeById(id);
+    public void deleteEmployeeById(Long id) {
+        employeeRepository.deleteById(id);
     }
-
 }
